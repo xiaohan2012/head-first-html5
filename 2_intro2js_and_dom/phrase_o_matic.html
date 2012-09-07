@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript">
+	function init(){
+		var words1 = ["a bucket of" , "a bag of" , "a bunch of" , "a pile of"];
+		var words2 = ["rotten" , "fresh" , "ripe" ];
+		var words3  = ["socks" , "girls" , "cloud" , "air"];
+		document.getElementById("word1").innerHTML = words1[Math.floor(Math.random() * words1.length)];
+		document.getElementById("word2").innerHTML = words2[Math.floor(Math.random() * words2.length)];
+		document.getElementById("word3").innerHTML = words3[Math.floor(Math.random() * words3.length)];
+	}
+	window.onload = init;
+	</script>
+</head>
+<body>
+	<span id="word1"></span> &nbsp
+	<span id="word2"></span> &nbsp
+	<span id="word3"></span> 
+</body>
+</html>
