@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript">
+	window.onload = function(){
+		var Server = function(brand , core_number  , memory_size , disk_size){
+			//this = null; //trying to be evil, but `this` is a keyword
+			console.log(this);
+			this.brand = brand;
+			this.core_number = core_number;
+			this.memory_size = memory_size;
+			this.disk_size = disk_size;
+			this.qualified_or_not = function(){
+				if( this.core_number > 2 && this.memory_size >= 2024 && this.disk_size >= 20){
+					console.log(this.brand  + " is qualified to do this bioinformatic computing!");
+				}
+				else{
+					console.log(this.brand  + " is NOT qualified to do this bioinformatic computing!");
+				}
+			}
+		}
+		var Dell = new  Server("Dell7310" , 8 , 8192 , 500);
+		var Linode = new Server("Linode512" , 1 , 512 , 20);
+		Dell.qualified_or_not();
+		Linode.qualified_or_not();
+		
+	};	
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
