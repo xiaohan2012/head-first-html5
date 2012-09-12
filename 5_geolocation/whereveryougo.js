@@ -1,4 +1,31 @@
-window.onload = getMyLocation;
+window.onload = init;
+
+function init(){
+    if( navigator.geolocation ){
+        var watchBtn = document.getElementById("watch");
+        var clearBtn = document.getElementById("clearWatch");
+        watchBtn.onclick = watchPosition;
+        clearBtn.onclick = clearWatch;
+    }
+    else{
+        console.log("geo loc not available");
+    }
+}
+
+var watchId;
+
+function watchPosition(){
+    console.log("watch");
+    watchId = navigator.geolocation.watchPosition(getMyLocation);
+}
+
+function clearWatch(){
+    if(watchId){
+        console.log("clear" , watchId);
+        navigator.geolocation.clearWatch(watchId);
+            watchId = null;
+    }
+}
 
 var ourCoords = {
     latitude: 47.624851 , 
@@ -7,7 +34,13 @@ var ourCoords = {
 
 function getMyLocation(){
     if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(displayLocation , geoErrorHandler , {enableHighAccuracy : true , timeout : 1});
+        navigator.geolocation.getCurrentPosition(displayLocation , 
+                geoErrorHandler ,
+                {
+                    enableHighAccuracy :     true , 
+                    timeout:                 Infinity,//Infinity is a kw in js
+                    maximumAge:              0,//90 secs
+                });
         navigator.geolocation.getCurrentPosition(displayDistance , geoErrorHandler);
         navigator.geolocation.getCurrentPosition(showMap, geoErrorHandler);
     }
@@ -66,8 +99,13 @@ function showMap(position){
     }
 
     var mapDiv = document.getElementById("map");
-    map = new google.maps.Map(mapDiv , mapOptions);
-    addMarker(map , loc , "My ISP" , "which is not where I live, expectedly!");
+    if( map == null){
+        map = new google.maps.Map(mapDiv , mapOptions);
+        scrollMapToPostion(position.coords);
+    }
+    else{
+        scrollMapToPostion(position.coords);
+    }
 }
 
 function addMarker(map , coords , title , content){
@@ -87,4 +125,10 @@ function addMarker(map , coords , title , content){
     google.maps.event.addListener(marker , "click" , function(){
             infoWindow.open(map);
         });
+}
+
+function scrollMapToPostion(coords){
+    var loc = new google.maps.LatLng(coords.latitude , coords.longitude);
+    map.panTo(loc);
+    addMarker(map , loc , "New location at" , "My new location");
 }
