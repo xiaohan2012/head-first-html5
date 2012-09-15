@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smile one smile, ten years young!</title>
+    <script type="text/javascript">
+        window.onload = drawSmileFace;
+        var c,canvas;
+        function drawSmileFace(){
+            canvas = document.getElementById("face");
+            c = canvas.getContext("2d");
+            var center_x = canvas.width/2;
+            var center_y = canvas.height/2;
+            //the face
+            fillCircle(center_x , center_y , 150 , "lightblue")
+
+            //eyes
+            fillCircle( center_x + 75 ,  center_y - 75, 10 , "black");//right
+            fillCircle( center_x - 75 ,  center_y - 75, 10 , "black");//left
+            
+            //draw mouth
+            c.beginPath();
+            c.arc(center_x,center_y - 50 , 50 ,  0, Math.PI , false);
+            c.fillStyle = "black";
+            c.lineWidth = 4;
+            //c.fill()
+            c.stroke();
+        }
+        function fillCircle(x,y,radius,fill_color){
+            c.beginPath();
+            c.arc(x , y , radius, 0 , Math.PI * 2);
+            c.fillStyle = fill_color;
+            c.fill()
+        }
+    </script>
+</head>
+<body>
+    <h1>Smile one smile, ten years young!(笑一笑，十年少！)</h1>
+    <canvas id="face" width="500" height="500"></canvas>
+</body>
+</html>
