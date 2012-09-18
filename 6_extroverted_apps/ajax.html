@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function(){
+            var url = "http://twitter.com/statuses/user_timeline/wickedsmartly.json?callback=updateTweets";
+            var req = new XMLHttpRequest();
+            req.open("GET",url);
+            req.onload = function(){
+                if(req.status = 200){
+                    console.log(res.responseText);
+                }
+            }
+            req.send();
+            var hf = function(title){
+                this.title = title;
+            }
+            var hfwd = new hf("Web Design");
+            var hfdp = new hf("Design Pattern");
+            console.log(hfwd,hfdp);
+        };
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

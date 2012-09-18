@@ -69,7 +69,7 @@ function drawText(canvas , c){
     
     //the tweet
     c.font = "italic 30pt Calibri";
-    c.strokeStyle = "red";
+    c.fillStyle = "red";
     c.lineWidth = 2;
     c.strokeText(tweet,80,canvas.height - 80 , 400);//the last parameter indicates the max length of the text, if above, then text be scaled
 
